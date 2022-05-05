@@ -1,0 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.container {
+  margin: 10vh auto;
+  display: flex;
+  width: 80%;
+}
+.human,
+.computer {
+  width: 25%;
+  height: 600px;
+  box-shadow: 0 0 8px #ddd;
+}
+
+.batelfield {
+  width: 50%;
+  height: 600px;
+  box-shadow: 0 0 8px #ddd;
+}
+
+.info {
+  width: 300px;
+  box-shadow: 0 0 8px skyblue;
+}
+
+.soldier {
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  box-shadow: 0 0 8px #ddd;
+  display: inline-block;
+}
+
+.gun {
+  background-color: deepskyblue;
+}
+.sniper {
+  background-color: indianred;
+}
