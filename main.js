@@ -1,46 +1,57 @@
-let humanDiv = document.querySelector(".human");
-let computerDiv = document.querySelector(".computer");
+let humanDiv = human.holder;
+let computerDiv = computer.holder;
 let infoDiv = document.querySelector(".info");
+let numSoldiers = 100;
+
+human.makeSoldier(numSoldiers);
+computer.makeSoldier(numSoldiers);
 
 displaySoldiers();
 
 function displaySoldiers() {
-  allSoldiers.forEach((soldier) => {
-    let newSoldier = document.createElement("div");
-    newSoldier.className = `soldier ${soldier.weapon.name}`;
-    newSoldier.addEventListener("mouseenter", () => displayInfo(soldier));
-    humanDiv.appendChild(newSoldier);
-  });
+  for (let i = 0; i < numSoldiers; i++) {
+    let newHuman = document.createElement("div");
+    let newComputer = document.createElement("div");
+
+    // set human soldier
+    newHuman.className = `soldier human ${human.allSoldier[i].weapon.name}`;
+    newHuman.setAttribute("data-id", i);
+    newHuman.addEventListener("mouseenter", () =>
+      displayInfo(human.allSoldier[i])
+    );
+    newHuman.addEventListener("click", attack);
+    newHuman.addEventListener("mouseleave", () =>
+      hideInfo(human.allSoldier[i])
+    );
+
+    // set computer soldier
+    newComputer.className = `soldier computer ${computer.allSoldier[i].weapon.name}`;
+    newComputer.setAttribute("data-id", i);
+    newComputer.addEventListener("mouseenter", () =>
+      displayInfo(computer.allSoldier[i])
+    );
+    newComputer.addEventListener("mouseleave", () =>
+      hideInfo(computer.allSoldier[i])
+    );
+
+    humanDiv.appendChild(newHuman);
+    computerDiv.appendChild(newComputer);
+  }
 }
 
-// function displayInfo(soldier) {
-//   infoDiv.innerHTML = `
-//     <h1>${soldier.name}</h1>
-//     <p>Weapon: ${soldier.weapon.name}</p>
-//     <p>Damage: ${soldier.weapon.damage}</p>
-//     `;
-// }
+function attack() {
+  game.attack(this);
+  // console.log(this);
+}
 
-// let books = new Promise(function (resolve, reject) {
-//   let xml = new XMLHttpRequest();
-//   let url =
-//     "https://mysafeinfo.com/api/data?list=bestnovels7&format=json&select=Rank,Title,Author,Published,Isbn13,ID&case=default";
-//   xml.open("get", url);
-//   xml.onreadystatechange = function () {
-//     if (xml.readyState === 4 && xml.status === 200) {
-//       resolve(JSON.parse(xml.responseText));
-//     } else if (xml.status === 404) {
-//       reject("Nema podataka");
-//     }
-//   };
-//   xml.send();
-// });
-
-// books.then(
-//   function (data) {
-//     console.log(data);
-//   },
-//   function (err) {
-//     console.log(err);
-//   }
-// );
+function displayInfo(soldier) {
+  infoDiv.style.display = "block";
+  infoDiv.innerHTML = `
+    <h1>${soldier.name}</h1>
+    <p>Weapon: ${soldier.weapon.name}</p>
+    <p>Damage: ${soldier.weapon.damage}</p>
+    `;
+}
+function hideInfo() {
+  infoDiv.style.display = "none";
+}

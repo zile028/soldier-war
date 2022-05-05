@@ -11,19 +11,24 @@
 .human,
 .computer {
   width: 25%;
-  height: 600px;
+
   box-shadow: 0 0 8px #ddd;
 }
 
 .batelfield {
   width: 50%;
-  height: 600px;
+
   box-shadow: 0 0 8px #ddd;
 }
 
 .info {
-  width: 300px;
+  padding: 10px;
+  background-color: white;
   box-shadow: 0 0 8px skyblue;
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .soldier {
@@ -39,4 +44,8 @@
 }
 .sniper {
   background-color: indianred;
+}
+
+.highlight {
+  box-shadow: 0 0 5px 5px black inset;
 }
