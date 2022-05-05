@@ -50,6 +50,7 @@ function displayInfo(soldier) {
     <h1>${soldier.name}</h1>
     <p>Weapon: ${soldier.weapon.name}</p>
     <p>Damage: ${soldier.weapon.damage}</p>
+    <p>Health: ${soldier.health}</p>
     `;
 }
 function hideInfo() {
