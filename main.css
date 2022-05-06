@@ -37,6 +37,16 @@
   margin: 2px;
   box-shadow: 0 0 8px #ddd;
   display: inline-block;
+  cursor: pointer;
+}
+.batelfield {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.knife {
+  background-color: blueviolet;
 }
 
 .gun {

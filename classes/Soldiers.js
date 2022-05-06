@@ -3,12 +3,13 @@ class Soldier {
     this.name = nameSoldier;
     this.weapon = weapon.getWeapon();
     this.health = 100;
+    this.isDead = false;
   }
 
   makeSoldier(num) {
     let soldiers = [];
     for (let i = 0; i < num; i++) {
-      soldiers.push(new Soldier(this.name + i));
+      soldiers.push(new Soldier(this.name + "-" + i));
     }
     return soldiers;
   }
