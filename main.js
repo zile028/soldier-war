@@ -1,15 +1,10 @@
-let humanDiv = human.holder;
-let computerDiv = computer.holder;
-let infoDiv = document.querySelector(".info");
-let numSoldiers = 100;
-
-human.makeSoldier(numSoldiers);
-computer.makeSoldier(numSoldiers);
+human.makeSoldier(game.numberSoldier);
+computer.makeSoldier(game.numberSoldier);
 
 displaySoldiers();
 
 function displaySoldiers() {
-  for (let i = 0; i < numSoldiers; i++) {
+  for (let i = 0; i < game.numberSoldier; i++) {
     let newHuman = document.createElement("div");
     let newComputer = document.createElement("div");
 
@@ -17,9 +12,11 @@ function displaySoldiers() {
     newHuman.className = `soldier human ${human.allSoldier[i].weapon.name}`;
     newHuman.setAttribute("data-id", i);
     newHuman.addEventListener("mouseenter", () =>
-      ui.showInfo(computer.allSoldier[i])
+      ui.showInfo(human.allSoldier[i])
     );
-    newHuman.addEventListener("click", () => attack(newHuman, i));
+    // newHuman.addEventListener("click", () => attack(newHuman, i));
+    newHuman.onclick = () =>
+      game.attack({ soldierDiv: newHuman, soldierId: i });
     newHuman.addEventListener("mouseleave", () => ui.hideInfo());
 
     // set computer soldier
@@ -30,11 +27,11 @@ function displaySoldiers() {
     );
     newComputer.addEventListener("mouseleave", () => ui.hideInfo());
 
-    humanDiv.appendChild(newHuman);
-    computerDiv.appendChild(newComputer);
+    ui.humanDiv.appendChild(newHuman);
+    ui.computerDiv.appendChild(newComputer);
   }
 }
 
 function attack(soldierDiv, soldierId) {
-  game.attack(soldierDiv, soldierId);
+  game.attack({ soldierDiv: soldierDiv, soldierId: soldierId });
 }
