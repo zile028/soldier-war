@@ -1,6 +1,6 @@
 class Game {
-  constructor() {
-    this.numberSoldier = 50;
+  constructor(numberSoldier) {
+    this.numberSoldier = numberSoldier;
   }
 
   avalibleSoldier() {
@@ -14,6 +14,7 @@ class Game {
   getOpponentSoldier() {
     return new Promise((resolve, reject) => {
       let rand = null;
+      ui.batlefieldBg(true);
       let interval = setInterval(() => {
         rand = this.avalibleSoldier()[
           Math.floor(Math.random() * this.avalibleSoldier().length)
@@ -22,7 +23,7 @@ class Game {
         setTimeout(() => {
           computer.holder.children[rand].classList.toggle("highlight");
         }, 100);
-      }, 200);
+      }, 300);
       setTimeout(() => {
         clearInterval(interval);
         let computerSoldierDiv = computer.holder.children[rand];
@@ -35,7 +36,6 @@ class Game {
   attack(hum) {
     hum.soldierDiv.classList.add("highlight");
     this.getOpponentSoldier().then((comp) => {
-      ui.batlefieldBg(true);
       hum.soldierDiv.classList.remove("highlight");
       comp.soldierDiv.classList.remove("highlight");
       human.allSoldier[hum.soldierId].health =
@@ -87,7 +87,7 @@ class Game {
       humanSoldierImg.remove();
       computerSoldierImg.remove();
       this.checkWinner();
-    }, 500);
+    }, 2000);
   }
 
   checkWinner() {
@@ -97,6 +97,12 @@ class Game {
       ui.showWinner(human);
     }
   }
-  start() {}
+  start() {
+    ui.computerDiv.innerHTML = "";
+    ui.humanDiv.innerHTML = "";
+    human.makeSoldier(game.numberSoldier);
+    computer.makeSoldier(game.numberSoldier);
+    ui.displaySoldier(game.numberSoldier, human, computer);
+    ui.hideWinner();
+  }
 }
-let game = new Game();
